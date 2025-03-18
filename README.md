@@ -1,1 +1,1 @@
-# -deepseek
+## 记录本地化部署deepseek以及通过nginx代理暴露外网端口来实现公网访问本地化deepseek服务
