@@ -28,7 +28,24 @@ ollama run deepseek-r1:32b
 运行成功后输入任意内容开始对话，有返回结果便表示成功部署了deepseek模型
 
 ## 绑定本地deepseek服务到本机ip的端口上
+找到配置文件并打开
+```
+vim /etc/systemd/system/ollama.service
+```
+在service字段中输入如下配置
+```
+Environment="OLLAMA_HOST=0.0.0.0"
+Environment="OLLAMA_ORIGINS=*"
+```
+ollama默认绑定11434端口号，相当于把deepseek服务绑定到了本机ip地址的11434端口号上
 
+尝试在本机使用ip端口号访问deepseek服务：
+```
+curl http://localhost:11434/api/generate -d '{
+"model" : "deepseek-r1:32b",
+"prompt" : "你好"
+}'
+```
 
 ## 使用nginx将公网端口映射到本机ip端口上
 
