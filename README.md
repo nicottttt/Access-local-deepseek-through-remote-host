@@ -84,5 +84,16 @@ systemctl restart nginx
 ```
 
 ## 使用不同网段的主机curl命令尝试连接deepseek
+切换到不同网段的云服务器上去尝试连接deepseek服务，看是否能够访问服务：
+```
+curl http://<云服务器公网ip>:80/api/generate -d '{
+"model" : "deepseek-r1:32b",
+"prompt" : "你好"
+}'
+```
+输入如下:
 
 ## 使用chatbox拉去部署在云服务器的deepseek api
+在windows机器上下载chatbox，进入到主界面后，配置相应的公网ip和端口，选择相对应的镜像：
+
+配置完成后就可以开始使用云服务器上本地化部署的deepseek了：
