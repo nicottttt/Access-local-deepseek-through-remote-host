@@ -39,6 +39,12 @@ Environment="OLLAMA_ORIGINS=*"
 ```
 ollama默认绑定11434端口号，相当于把deepseek服务绑定到了本机ip地址的11434端口号上
 
+重启ollama服务：
+```
+systemctl daemon-reload
+systemctl restart ollama
+```
+
 尝试在本机使用ip端口号访问deepseek服务：
 ```
 curl http://localhost:11434/api/generate -d '{
@@ -46,8 +52,36 @@ curl http://localhost:11434/api/generate -d '{
 "prompt" : "你好"
 }'
 ```
+可以看到本地请求被deepseek响应
 
 ## 使用nginx将公网端口映射到本机ip端口上
+先安装nginx
+```
+apt install nginx
+```
+创建deepseek.conf配置文件用于转发端口
+```
+vim /etc/nginx/sites-avaliable/deepseek.conf
+```
+在配置文件中输入如下内容
+```
+server {
+    listen <云服务器对外ip地址>:80;
+    server_name _;
+
+    location / {
+        proxy_pass http://localhost:11434; #ollama初始绑定11434端口号
+        proxy_set_header Host localhost:11434; #这里不改变入方向header会导致本地部署ollama服务拒绝访问403
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+使用```nginx -t```来确认配置文件是否正确，若正确，重启nginx服务
+```
+systemctl restart nginx
+```
 
 ## 使用不同网段的主机curl命令尝试连接deepseek
 
