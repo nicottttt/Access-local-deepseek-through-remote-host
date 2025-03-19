@@ -18,6 +18,8 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 下载完成后会自动识别nvidia驱动，如果没有检测到GPU驱动则会显示CPU-only模式
 
+![pic](./deepseek_pic/下载ollama.png "下载ollama")
+
 ## 拉取并运行deepseek模型
 根据ollama官方model的命令直接拉取
 ```
