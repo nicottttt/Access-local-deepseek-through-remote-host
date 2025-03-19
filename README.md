@@ -3,13 +3,15 @@
 ```
 nvidia-smi
 ```
-图片
+![图片1](./deepseek_pic/nvidia-smi.png "nvidia-smi")
+
 要根据自己GPU的配置选择deepseek镜像的版本
 
 可以看到本机配置为4090显卡，24G左右显存，最适配的deepseek镜像为32b
 
 ## 安装ollama
-图片
+![图片2](./deepseek_pic/ollama.png "ollama")
+
 根据官网https://ollama.com/download/linux 提示选择自己的操作系统下载，我这里是linux，直接复制官方命令下载
 ```
 curl -fsSL https://ollama.com/install.sh | sh
@@ -21,11 +23,15 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 ollama pull deepseek-r1:32b
 ```
+![图片3](./deepseek_pic/拉取模型.png "拉取模型")
+
 也可以直接拉取加运行
 ```
 ollama run deepseek-r1:32b
 ```
 运行成功后输入任意内容开始对话，有返回结果便表示成功部署了deepseek模型
+
+![图片4](./deepseek_pic/启动deepseek.png "运行deepseek")
 
 ## 绑定本地deepseek服务到本机ip的端口上
 找到配置文件并打开
@@ -53,6 +59,8 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 可以看到本地请求被deepseek响应
+
+![图片5](./deepseek_pic/本地访问deepseek.png "本地请求deepseek服务")
 
 ## 使用nginx将公网端口映射到本机ip端口上
 先安装nginx
@@ -93,7 +101,13 @@ curl http://<云服务器公网ip>:80/api/generate -d '{
 ```
 输入如下:
 
+![图片6](./deepseek_pic/外部访问deepseek.png "外部云主机访问deepseek服务")
+
 ## 使用chatbox拉去部署在云服务器的deepseek api
 在windows机器上下载chatbox，进入到主界面后，配置相应的公网ip和端口，选择相对应的镜像：
 
+![图片7](./deepseek_pic/chatbox连接deepseek.png "chatbox连接deepseek")
+
 配置完成后就可以开始使用云服务器上本地化部署的deepseek了：
+
+![图片8](./deepseek_pic/chatbox访问成功.png "chatbox成功访问远端云主机deepseek服务")
