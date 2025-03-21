@@ -87,6 +87,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
+```
 
 建立软连接
 
@@ -94,7 +95,6 @@ server {
 ln -s /etc/nginx/sites-avalible/deepseek.conf /etc/nginx/sites-enable/deepseek.conf
 ```
 
-```
 使用```nginx -t```来确认配置文件是否正确，若正确，重启nginx服务
 ```
 systemctl restart nginx
